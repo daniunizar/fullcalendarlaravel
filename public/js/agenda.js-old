@@ -1,0 +1,73 @@
+document.addEventListener('DOMContentLoaded', function() {
+    var formulario = document.querySelector("#eventCreate");
+    console.log(formulario);
+    var calendarEl = document.getElementById('agenda');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale:"es",
+      headerToolbar: {
+        left: 'prev,next today myCustomButton',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      dateClick:function(info){
+          $("#evento").modal("show");
+      }
+    });
+    calendar.render();
+
+    document.getElementById("btnCrear").addEventListener("click", function(){
+        console.log("Formulario: "+formulario);
+ 
+        var datos = new FormData(formulario); //metemos todos los datos del formulario en un FormData
+/*         var id = null;
+        var title = "Evento Genérico";
+        var start = "2021-05-05";
+        var start = "2021-05-05";
+        var token = $("meta[name=csrf-token]").attr("content");
+        var url="http://localhost/public/event/crear";
+        const xhttp = new XMLHttpRequest(); //Creamos el objeto ajax
+                xhttp.onreadystatechange = function(){//Cuando ese objeto cambie de estado, haremos lo que introduzcamos en esta función anónima
+                    //Como el cambio no tiene por qué ser a nuestro favor, debemos comprobar que recuperamos un 4 y un 200
+                    if(this.readyState == 4 && this.status ==200){ //Si la conexión ha sido un éxito...
+                        // calendar.render();
+                        calendar.refetchEvents();
+                    }else{//Si hemos fallado en la conexión y recuperación de esa información
+                        //document.getElementById("contenedor").innerHTML="<p>Ha habido un error, esperábamos respuesta 4-200 y hemos recibido "+this.readyState+" - "+this.status+"</p>";
+                    }
+                };
+                xhttp.open("POST", url, true); //Recibe el método (post o get), la url del fichero a recuperar y true o false a la pregunta de si queremos que sea asínscrono. Si no es asíncrono no es AJAX
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//CON POST SE PONE ESTE ENCABEZADO para que envíe los datos!!!. Sin él, aunque realiza la recepción, enviar no ha enviado nada. Con get no hace falta.
+                xhttp.send("id="+id+"&title="+title+"&start="+start+"&end="+end+"&_token="+token);
+*/
+        
+
+console.log(datos);
+console.log("title :"+datos.get('title'));
+console.log("start :"+datos.get('start'));
+console.log("end: "+datos.get('end'));
+
+        $.ajax({
+          type: "POST",
+          url: "http://localhost/agenda/public/event/crear", //ruta completa?        
+          //url: "{{/event/crear}}", //ruta alternativa
+          data: datos,
+          success: function(){
+            calendar.refetchEvents();
+            $("#evento").modal('hide');
+          },
+          error: function(error){console.log("El error: "+error)},
+          processData: false,  // tell jQuery not to process the data
+          contentType: false   // tell jQuery not to set contentType
+        });
+
+
+
+
+
+
+
+        
+     });
+
+  });

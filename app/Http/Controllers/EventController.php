@@ -35,7 +35,10 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(Event::$rules);//validamos la información
+
+        $event = new Event($request->all());//Creamos la info con todos los datos
+        $event->save();
     }
 
     /**
