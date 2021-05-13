@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/event', [App\Http\Controllers\EventController::class, 'index']);
-Route::post('/event/crear', [App\Http\Controllers\EventController::class, 'store'])->name('event.create');
-
+// Route::get('/event', [App\Http\Controllers\EventController::class, 'index']);
+// Route::post('/event/crear', [App\Http\Controllers\EventController::class, 'store'])->name('event.create');
+Route::get('/index', [App\Http\Controllers\EventController::class, 'index']);
+Route::resource('/event', App\Http\Controllers\EventController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -20,7 +20,7 @@
                     </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('event.create')}}" id="eventCreate">
+                <form action="{{route('event.store')}}" id="eventCreate"><!--event.create: nombre de la vista de routes-->
                     @csrf
                     <div class="form-group">
                       <label for="title">Título</label>
