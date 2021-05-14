@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       dateClick:function(info){
           $("#evento").modal("show");
-      }
+      },
+      events: "{{route('listar)}}"
     });
     calendar.render();
 

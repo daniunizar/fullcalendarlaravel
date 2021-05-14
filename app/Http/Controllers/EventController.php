@@ -14,7 +14,16 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('event.index');
+        //Uso Event:all para recuperar todos los registros de la tabla events y los guardo en la variable $events
+        $events = Event::all(); 
+        //Devuelvo la vista event.index, a la que le paso en forma de array esa información recuperada (los registros de la tabla events)
+        //return view('event.index', compact('events'));
+        //echo $json;
+        $json = json_encode($events);
+        var_dump($json);
+        return view('event.index')->with('events',$events);
+        //return response()->json($events);
+        //return view('event.index');
     }
 
     /**
@@ -49,7 +58,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+
     }
 
     /**
@@ -85,4 +94,18 @@ class EventController extends Controller
     {
         //
     }
+
+    /**
+     * Show events in fullcalendar
+     *
+     * @return \Illuminate\Http\Response
+     */
+    
+    public function list()
+    {
+        $eventos = Event::all(); 
+        $json = json_encode($eventos);
+        return $json; //echo?
+    }
+
 }
