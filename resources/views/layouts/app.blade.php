@@ -22,6 +22,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+    <!-- moment lib -->
+<script src='https://cdn.jsdelivr.net/npm/moment@2.27.0/min/moment.min.js'></script>
+
+<!-- fullcalendar bundle -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js'></script>
+
+<!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/moment@5.6.0/main.global.min.js'></script>
+  
 </head>
 <body>
     <div id="app">

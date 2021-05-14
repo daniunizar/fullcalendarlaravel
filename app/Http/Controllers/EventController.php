@@ -69,7 +69,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+
     }
 
     /**
@@ -81,6 +81,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        var_dump($event);
         //
     }
 

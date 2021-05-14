@@ -67,6 +67,15 @@ document.addEventListener('DOMContentLoaded', function() {
       dateClick:function(info){
           $("#evento").modal("show");
       },
+      eventClick:function(info){
+          $("#title").val(info.event.title);
+          $("#start").val(moment(info.event.start).format('YYYY-MM-DD'));
+          $("#end").val(moment(info.event.end).format('YYYY-MM-DD'));
+
+          $("#evento").modal("show");
+      },
+
+
       events: "{{route('event.list')}}"
     });
     calendar.render();
