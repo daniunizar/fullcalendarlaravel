@@ -81,7 +81,6 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        var_dump($event);
         //
     }
 
@@ -105,8 +104,42 @@ class EventController extends Controller
     public function list()
     {
         $eventos = Event::all(); 
-        $json = json_encode($eventos);
-        return $json; //echo?
+
+        //$json = json_encode($eventos);
+        //return $json; //echo?
+        //return response()->json($eventos);
+        //Recuperamos la array de registros de la tabla events, la mapeamos, guardamos en $events y la retornamos como json
+   
+        $events = array();
+        foreach ($eventos as $valor){
+            $aux['id']=$valor['id'];
+            $aux['title']=$valor['title'];
+            $aux['start']=$valor['start'];
+            $aux['end']=$valor['end'];
+            array_push($events,$aux);   
+        }
+        return json_encode($events);
+        
     }
+
+    /**
+     * Update event in database
+     *
+     * @return \Illuminate\Http\Response
+     */
+    
+    public function actualizar(Request $request)
+    {
+        echo "Has llamado a la función actualizar";
+        var_dump($request);
+        $event = Event::find($request->id);
+        $event->title = $request->title;
+        $event->start = $request->start;
+        $event->end = $request->end;
+        //$event->save();
+        $event->update();
+        //return $event;
+    }
+
 
 }
