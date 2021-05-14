@@ -130,8 +130,8 @@ class EventController extends Controller
     
     public function actualizar(Request $request)
     {
-        echo "Has llamado a la función actualizar";
-        var_dump($request);
+        //echo "Has llamado a la función actualizar";
+        //var_dump($request);
         $event = Event::find($request->id);
         $event->title = $request->title;
         $event->start = $request->start;

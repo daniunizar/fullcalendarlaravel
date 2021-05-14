@@ -28,12 +28,20 @@
                       <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="Nombre del evento">
                     </div>
                     <div class="form-group">
-                      <label for="start">Fecha de inicio</label>
-                      <input type="text" class="form-control" name="start" id="start" aria-describedby="helpId" placeholder="Fecha de inicio">
+                      <label for="date_start">Fecha de inicio</label>
+                      <input type="text" class="form-control" name="date_start" id="date_start" aria-describedby="helpId" placeholder="Fecha de inicio">
                     </div>
                     <div class="form-group">
-                      <label for="end">Fecha de finalización</label>
-                      <input type="text" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de finalización">
+                      <label for="hour_start">Fecha de inicio</label>
+                      <input type="text" class="form-control" name="hour_start" id="hour_start" aria-describedby="helpId" placeholder="Hora de inicio">
+                    </div>
+                    <div class="form-group">
+                      <label for="date_end">Fecha de finalización</label>
+                      <input type="text" class="form-control" name="date_end" id="date_end" aria-describedby="helpId" placeholder="Fecha de finalización">
+                    </div>
+                    <div class="form-group">
+                      <label for="hour_end">Fecha de inicio</label>
+                      <input type="text" class="form-control" name="hour_end" id="hour_end" aria-describedby="helpId" placeholder="Hora de inicio">
                     </div>
                 </form>
             </div>
@@ -89,7 +97,15 @@
 
         //var action = formulario.action;
         console.log(formulario);
+        var date_start = $('#date_start').val();
+        var hour_start = $('#hour_start').val();
+        var start = date_start + " "+hour_start;
+        var date_end = $('#date_end').val();
+        var hour_end = $('#hour_end').val();
+        var end = date_end + " "+hour_end;
         var datos = new FormData(formulario); //metemos todos los datos del formulario en un FormData
+        datos.append('start', start);
+        datos.append('end', end);
         console.log(datos);
         console.log("title: "+datos.get('title'));
         console.log("start: "+datos.get('start'));
