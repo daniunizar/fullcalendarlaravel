@@ -64,8 +64,8 @@
       initialView: 'dayGridMonth',
       locale:"es",
       selectable: true,//Permite seleccionar los días del calendario
-            editable: true,
-            height: 850,//Altura del calendario
+      editable: true,
+      height: 850,//Altura del calendario
       headerToolbar: {
         left: 'prev,next today myCustomButton',
         center: 'title',
@@ -86,6 +86,12 @@
           $("#hour_end").val(moment(info.event.end).format('H:mm:ss'));
           $("#evento").modal("show");
       },
+      eventDrop: function(info) {
+        actualizar_elemento_dropeado(info);
+      },
+      eventResize: function(info) {
+              actualizar_elemento_dropeado(info);
+            },
       events: "{{route('event.list')}}"
     });
     calendar.render();
@@ -195,6 +201,38 @@
           success: function(){
             calendar.refetchEvents();
             $("#evento").modal('hide');
+          },
+          error: function(error){console.log("Ha ocurido un error: "+error)},
+          processData: false,  // tell jQuery not to process the data
+          contentType: false   // tell jQuery not to set contentType
+        });
+    }
+
+    function actualizar_elemento_dropeado(info){
+      var id = info.event.id;
+      var title = info.event.title;
+      var start = moment(info.event.start).format('YYYY-MM-DD H:mm:ss');
+      var end = moment(info.event.end).format('YYYY-MM-DD H:mm:ss');
+      console.log("llego aqui1");
+      var data = new FormData(); //metemos todos los datos del formulario en un FormData
+      data.append('id', id);
+      data.append('title', title);
+      data.append('start', start);
+      data.append('end', end);
+      console.log("llego aqui2");
+      console.log("ID para actualizar: "+data.get('id'));
+      console.log("title para actualizar: "+data.get('title'));
+      console.log("start para actualizar: "+data.get('start'));
+      console.log("end para actualizar: "+data.get('end'));
+      $.ajax({
+          type: "POST",
+          url: "{{route('event.actualizar')}}",    
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },     
+          data: data,
+          success: function(){
+            calendar.refetchEvents();
           },
           error: function(error){console.log("Ha ocurido un error: "+error)},
           processData: false,  // tell jQuery not to process the data
