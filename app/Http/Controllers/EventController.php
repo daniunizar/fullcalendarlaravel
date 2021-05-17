@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +26,7 @@ class EventController extends Controller
         //return view('event.index', compact('events'));
         //echo $json;
         $json = json_encode($events);
-        var_dump($json);
+        //var_dump($json);
         return view('event.index')->with('events',$events);
         //return response()->json($events);
         //return view('event.index');

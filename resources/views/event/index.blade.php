@@ -4,11 +4,6 @@
     <div id="agenda">
     </div>
 </div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#evento">
-  Launch
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="evento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -254,7 +249,7 @@
 
 </script>
 
-
+<!--
 @if ($events->isEmpty())
                 <div>No hay Eventos</div>
             @else
@@ -279,3 +274,4 @@
                 </table>
             @endif
 @endsection
+-->
