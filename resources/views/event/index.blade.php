@@ -38,6 +38,20 @@
                       <label for="hour_end">Hora de finalización</label>
                       <input type="text" class="form-control" name="hour_end" id="hour_end" aria-describedby="helpId" placeholder="Hora de inicio">
                     </div>
+                    <div class="form-group">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Asiste</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody_asistentes">
+
+                        </tbody>
+                      </table>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
