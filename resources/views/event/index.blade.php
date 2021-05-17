@@ -32,7 +32,7 @@
                       <input type="text" class="form-control" name="date_start" id="date_start" aria-describedby="helpId" placeholder="Fecha de inicio">
                     </div>
                     <div class="form-group">
-                      <label for="hour_start">Fecha de inicio</label>
+                      <label for="hour_start">Horade inicio</label>
                       <input type="text" class="form-control" name="hour_start" id="hour_start" aria-describedby="helpId" placeholder="Hora de inicio">
                     </div>
                     <div class="form-group">
@@ -40,7 +40,7 @@
                       <input type="text" class="form-control" name="date_end" id="date_end" aria-describedby="helpId" placeholder="Fecha de finalización">
                     </div>
                     <div class="form-group">
-                      <label for="hour_end">Fecha de inicio</label>
+                      <label for="hour_end">Hora de finalización</label>
                       <input type="text" class="form-control" name="hour_end" id="hour_end" aria-describedby="helpId" placeholder="Hora de inicio">
                     </div>
                 </form>
@@ -72,14 +72,18 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       dateClick:function(info){
+        limpiarFormulario();
           $("#evento").modal("show");
       },
       eventClick:function(info){
+        limpiarFormulario();
         console.log(info);
           $("#id").val(info.event.id);
           $("#title").val(info.event.title);
-          $("#start").val(moment(info.event.start).format('YYYY-MM-DD'));
-          $("#end").val(moment(info.event.end).format('YYYY-MM-DD'));
+          $("#date_start").val(moment(info.event.start).format('YYYY-MM-DD'));
+          $("#hour_start").val(moment(info.event.start).format('hh:mm:ss'));
+          $("#date_end").val(moment(info.event.end).format('YYYY-MM-DD'));
+          $("#hour_end").val(moment(info.event.end).format('H:mm:ss'));
           $("#evento").modal("show");
       },
       events: "{{route('event.list')}}"
@@ -142,6 +146,19 @@
         console.log(datos);
         console.log("id: "+datos.get('id'));
         console.log("title: "+datos.get('title'));
+        var date_start = $('#date_start').val();
+        var hour_start = $('#hour_start').val();
+        var start = date_start + " "+hour_start;
+        var date_end = $('#date_end').val();
+        var hour_end = $('#hour_end').val();
+        var end = date_end + " "+hour_end;
+        datos.append('start', start);
+        datos.append('end', end);
+        console.log(datos);
+        console.log("date_start: "+datos.get('date_start'));
+        console.log("date_end: "+datos.get('date_end'));
+        console.log("hour_start: "+datos.get('hour_start'));
+        console.log("hour_end: "+datos.get('hour_end'));
         console.log("start: "+datos.get('start'));
         console.log("end: "+datos.get('end'));
 
@@ -158,6 +175,15 @@
           contentType: false   // tell jQuery not to set contentType
         });
 
+    }
+
+    function limpiarFormulario(){
+          $("#id").val("");
+          $("#title").val("");
+          $("#date_start").val("");
+          $("#hour_start").val("");
+          $("#date_end").val("");
+          $("#hour_end").val("");
     }
   });
 
