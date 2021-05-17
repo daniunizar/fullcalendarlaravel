@@ -21,9 +21,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all(); 
-        var_dump($users);
+        //var_dump($users);
         $json = json_encode($users);
-        return view('user/list')->with('users',$users);
+        //return view('user/list')->with('users',$users);
+        return view('event.index')->with('users',$users);
     }
 
 

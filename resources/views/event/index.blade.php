@@ -48,7 +48,13 @@
                           </tr>
                         </thead>
                         <tbody id="tbody_asistentes">
-
+                          @foreach ($users as $user)                            
+                            <tr>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->name}}</td>
+                                <td><input type="checkbox" id="<?php $id = $user->id; echo $id;?>"></td>
+                            </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -82,7 +88,7 @@
       },
       dateClick:function(info){
         limpiarFormulario();
-          $("#evento").modal("show");
+        $("#evento").modal("show");
       },
       eventClick:function(info){
         limpiarFormulario();
@@ -248,6 +254,8 @@
           contentType: false   // tell jQuery not to set contentType
         });
     }
+
+
 
     function limpiarFormulario(){
           $("#id").val("");
