@@ -100,7 +100,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <!--Fin Scripts de Bootstrap-->
-<!--Axios-->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!--Fin axios-->
+
 </html>

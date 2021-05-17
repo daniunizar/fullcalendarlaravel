@@ -24,5 +24,7 @@ Auth::routes();
 Route::get('/index', [App\Http\Controllers\EventController::class, 'index']);
 Route::get('event/list', array('as'=>'event.list', 'uses'=>'App\Http\Controllers\EventController@list'));//Ruta añadida como complemento a event para listar los eventos
 Route::post('event/actualizar', array('as'=>'event.actualizar', 'uses'=>'App\Http\Controllers\EventController@actualizar'));//Ruta añadida como complemento a event para listar los eventos
+Route::post('event/destruir', array('as'=>'event.destruir', 'uses'=>'App\Http\Controllers\EventController@destruir'));//Ruta añadida como complemento a event para eliminar los eventos
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/event', App\Http\Controllers\EventController::class);

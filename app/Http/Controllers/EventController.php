@@ -90,9 +90,10 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Request $request)
     {
-        //
+        $event = Event::find($request->id);      
+        $event->delete();
     }
 
     /**
@@ -139,6 +140,14 @@ class EventController extends Controller
         //$event->save();
         $event->update();
         //return $event;
+    }
+
+    public function destruir(Request $request)
+    {
+        $event = Event::find($request->id);    
+        var_dump($event);  
+        $event->delete();
+        //return redirect('/');
     }
 
 

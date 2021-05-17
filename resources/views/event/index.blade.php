@@ -48,7 +48,7 @@
             <div class="modal-footer">
                 <button type="button" data-target="#event_form" class="btn btn-success" id="btnCrear">Crear</button>
                 <button type="button" data-target="#event_form" class="btn btn-warning" id="btnModificar">Editar</button>
-                <button type="button" class="btn btn-danger" id="btnEliminar">Eliminar</button>
+                <button type="button" data-target="#event_form" class="btn btn-danger" id="btnEliminar">Eliminar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -92,6 +92,7 @@
     //Listener de todos los botones
     document.getElementById("btnCrear").addEventListener("click", fnSubmit);
     document.getElementById("btnModificar").addEventListener("click", updateEvent);
+    document.getElementById("btnEliminar").addEventListener("click", deleteEvent);
     
     //Al pulsar el Btn Crear Evento de la Modal evento
     function fnSubmit(e){
@@ -175,6 +176,30 @@
           contentType: false   // tell jQuery not to set contentType
         });
 
+    }
+
+    function deleteEvent(){
+      var id = $("#id").val();
+      console.log("Id del elemento a borrar: "+id);
+      var data = new FormData();
+      data.append('id', id);
+      console.log(data);
+      console.log("llego aquí");
+      $.ajax({
+          type: "POST",
+          url: "{{route('event.destruir')}}",   
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },   
+          data: data,
+          success: function(){
+            calendar.refetchEvents();
+            $("#evento").modal('hide');
+          },
+          error: function(error){console.log("Ha ocurido un error: "+error)},
+          processData: false,  // tell jQuery not to process the data
+          contentType: false   // tell jQuery not to set contentType
+        });
     }
 
     function limpiarFormulario(){
