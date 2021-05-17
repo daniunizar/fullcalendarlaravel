@@ -23,7 +23,7 @@ class UserController extends Controller
         $users = User::all(); 
         var_dump($users);
         $json = json_encode($users);
-        return view('user')->with('users',$users);
+        return view('user/list')->with('users',$users);
     }
 
 
