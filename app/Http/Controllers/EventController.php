@@ -178,7 +178,7 @@ class EventController extends Controller
         //return redirect('/');
     }
 
-    public function listar_asistentes(Request $request){
+    public function pintar_asistentes(Request $request){
         $event_id = $request->id;
         $event = Event::find($event_id);
         $asistentes = $event->users;
