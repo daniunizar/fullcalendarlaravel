@@ -56,7 +56,23 @@ class EventController extends Controller
         $request->validate(Event::$rules);//validamos la información
 
         $event = new Event($request->all());//Creamos la info con todos los datos
+        
         $event->save();
+  
+        $event_id = $event->id;//Recuperamos la id del evento creado, para usarla en events_users
+        $string_asistentes = $request->input('array_asistentes');
+        $array_asistentes = explode(",", $string_asistentes);
+        var_dump($array_asistentes);
+        $event=Event::find($event_id);
+
+     
+        $event->users()->attach($array_asistentes);
+/*
+        foreach ($array_asistentes as $valor){ //$valor es cada id de un checkbox activo, de un user que asiste al evento
+            $event=Event::find($event_id);
+            $event->users()->attach($valor);
+        }
+*/
     }
 
     /**
@@ -158,6 +174,5 @@ class EventController extends Controller
         $event->delete();
         //return redirect('/');
     }
-
 
 }

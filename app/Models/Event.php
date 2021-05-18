@@ -18,7 +18,8 @@ class Event extends Model
     protected $fillable=['title', 'start', 'end'];
     
     public function users(){
-        return $this->belongsToMany('\App\User','events_users')
-            ->withPivot('users_id','status');
+        /*return $this->belongsToMany('\App\Models\User','events_users')
+            ->withPivot('users_id','status');*/
+            return $this->belongsToMany('\App\Models\User', 'events_users');
     }
 }

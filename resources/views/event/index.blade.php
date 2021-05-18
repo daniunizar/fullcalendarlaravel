@@ -137,6 +137,15 @@
         console.log("start: "+datos.get('start'));
         console.log("end: "+datos.get('end'));
 
+        //Generamos lista de asistentes a partir de los checkbox marcados:
+        var array_asistentes = new Array();
+
+        $("input:checkbox:checked").each(function() {
+             console.log($(this).attr('id'));
+             array_asistentes.push($(this).attr('id'));
+        });
+        datos.append('array_asistentes', array_asistentes);
+
         $.ajax({
           type: "POST",
           url: "{{route('event.store')}}",       

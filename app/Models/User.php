@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     public function events(){
-        return $this->belongsToMany('\App\Event','events_users')
+        return $this->belongsToMany('\App\Models\Event','events_users')
             ->withPivot('events_id','status');
     }
 }

@@ -27,5 +27,4 @@ class UserController extends Controller
         return view('event.index')->with('users',$users);
     }
 
-
 }
