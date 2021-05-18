@@ -26,6 +26,8 @@ Route::get('user', [App\Http\Controllers\UserController::class, 'index'])->name(
 Route::get('event/list', array('as'=>'event.list', 'uses'=>'App\Http\Controllers\EventController@list'));//Ruta añadida como complemento a event para listar los eventos
 Route::post('event/actualizar', array('as'=>'event.actualizar', 'uses'=>'App\Http\Controllers\EventController@actualizar'));//Ruta añadida como complemento a event para listar los eventos
 Route::post('event/destruir', array('as'=>'event.destruir', 'uses'=>'App\Http\Controllers\EventController@destruir'));//Ruta añadida como complemento a event para eliminar los eventos
+Route::post('event/listar_asistentes', array('as'=>'event.listar_asistentes', 'uses'=>'App\Http\Controllers\EventController@listar_asistentes'));//Ruta añadida como complemento a event para listar asistentes a los eventos
+Route::post('events_users/listar_asistentes', array('as'=>'events_users.listar_asistentes', 'uses'=>'App\Http\Controllers\EventsUsersController@listar_asistentes'));//Ruta añadida como complemento a event para listar asistentes a los eventos
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/event', App\Http\Controllers\EventController::class);

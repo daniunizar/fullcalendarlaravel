@@ -24,10 +24,18 @@ class EventController extends Controller
         //Uso Event:all para recuperar todos los registros de la tabla events y los guardo en la variable $events
         $events = Event::all();
         $users = User::all();
+
+        foreach ($events as $e) {
+            //$e->usr = $e->users;
+            $e->users;
+        }
+        
         //Devuelvo la vista event.index, a la que le paso en forma de array esa información recuperada (los registros de la tabla events)
         //return view('event.index', compact('events'));
         //echo $json;
+        //dump($events);
         $json = json_encode($events);
+        
         //var_dump($json);
         //return view('event.index')->with('events',$events);
         return view('event.index', compact('events', 'users'));
@@ -62,7 +70,7 @@ class EventController extends Controller
         $event_id = $event->id;//Recuperamos la id del evento creado, para usarla en events_users
         $string_asistentes = $request->input('array_asistentes');
         $array_asistentes = explode(",", $string_asistentes);
-        var_dump($array_asistentes);
+        //var_dump($array_asistentes);
         $event=Event::find($event_id);
 
      
@@ -135,16 +143,11 @@ class EventController extends Controller
         //return $json; //echo?
         //return response()->json($eventos);
         //Recuperamos la array de registros de la tabla events, la mapeamos, guardamos en $events y la retornamos como json
-   
-        $events = array();
-        foreach ($eventos as $valor){
-            $aux['id']=$valor['id'];
-            $aux['title']=$valor['title'];
-            $aux['start']=$valor['start'];
-            $aux['end']=$valor['end'];
-            array_push($events,$aux);   
+      
+        foreach ($eventos as $e) {
+            $e->users;
         }
-        return json_encode($events);
+        return json_encode($eventos);
         
     }
 
@@ -173,6 +176,14 @@ class EventController extends Controller
         var_dump($event);  
         $event->delete();
         //return redirect('/');
+    }
+
+    public function listar_asistentes(Request $request){
+        $event_id = $request->id;
+        $event = Event::find($event_id);
+        $asistentes = $event->users;
+        dump($asistentes);
+        echo json_encode($asistentes);
     }
 
 }

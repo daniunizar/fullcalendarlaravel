@@ -100,6 +100,11 @@
           $("#date_end").val(moment(info.event.end).format('YYYY-MM-DD'));
           $("#hour_end").val(moment(info.event.end).format('H:mm:ss'));
           $("#evento").modal("show");
+
+          //info.event.setExtendedProp( name, value )
+
+
+          pintar_asistentes(info.event.id);
       },
       eventDrop: function(info) {
         actualizar_elemento_dropeado(info);
@@ -264,7 +269,37 @@
         });
     }
 
+    function pintar_asistentes(id){
+      //Recuperamos el id del evento
+      //console.log("ID DEL EVENTO:"+info.event.id);
+      //console.log(info.event);
+      var data = new FormData(); //metemos todos los datos del formulario en un FormData
+      data.append('id', id);
+      $.ajax({
+          type: "POST",
+          //url: "{{route('events_users.listar_asistentes')}}",    
+          url: "{{route('event.index')}}",    
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },     
+          data: data,
+          success: function(){
+            //calendar.refetchEvents();
+            var resultado = this.response;
+            console.log("HECHO");
+            console.log(resultado);
+          },
+          error: function(error){console.log("Ha ocurido un error: "+error)},
+          processData: false,  // tell jQuery not to process the data
+          contentType: false   // tell jQuery not to set contentType
+        });
+      //console.log("ASISTENTES DEL EVENTO:"+info.event.extendedProps.users);
+      //Recuperamos array de asistentes con un ajax
 
+      //De ellos hacemos un array de ids de asistentes
+      //Recorremos todos los checkboxes con jquery
+      //Los que tengan la id de un asistente, les añadimos la prop checked (ver cómo se hace en limpiarFormulario, cambiando true por false)
+    }
 
     function limpiarFormulario(){
           $("#id").val("");
