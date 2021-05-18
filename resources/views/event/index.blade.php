@@ -273,6 +273,11 @@
           $("#hour_start").val("");
           $("#date_end").val("");
           $("#hour_end").val("");
+          //limpiamos todos los checkboxes:
+          $("input:checkbox:checked").each(function() {
+             console.log($(this).attr('id'));
+             $(this).prop("checked", false);
+        });
     }
   });
 
