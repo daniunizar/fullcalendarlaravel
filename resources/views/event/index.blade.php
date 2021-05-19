@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<div id="snackbar"><p id="texto_tostada"></p></div>
 <div class="container">
     <div id="agenda">
     </div>
@@ -172,6 +173,7 @@
           success: function(){
             calendar.refetchEvents();
             $("#evento").modal('hide');
+            mostrar_snackbar("crear");
           },
           error: function(error){console.log("Ha ocurido un error: "+error)},
           processData: false,  // tell jQuery not to process the data
@@ -225,6 +227,7 @@
           success: function(){
             calendar.refetchEvents();
             $("#evento").modal('hide');
+            mostrar_snackbar("modificar");
           },
           error: function(error){console.log("Ha ocurido un error: "+error)},
           processData: false,  // tell jQuery not to process the data
@@ -250,6 +253,7 @@
           success: function(){
             calendar.refetchEvents();
             $("#evento").modal('hide');
+            mostrar_snackbar("eliminar");
           },
           error: function(error){console.log("Ha ocurido un error: "+error)},
           processData: false,  // tell jQuery not to process the data
@@ -317,6 +321,46 @@
     }
   });
 
+  function mostrar_snackbar(tipo_accion) {
+  // Get the snackbar DIV  
+  var snackbar = document.getElementById("snackbar");
+  console.log(snackbar);
+  if(snackbar.classList.contains("verde")){
+    snackbar.classList.remove("verde");
+  }
+  if(snackbar.classList.contains("rojo")){
+    snackbar.classList.remove("rojo");
+  }
+  if(snackbar.classList.contains("naranja")){
+    snackbar.classList.remove("naranja");
+  }
+
+  var texto_crear = "Evento creado";
+  var texto_modificar = "Evento modificado con éxito";
+  var texto_eliminar = "Evento eliminado";
+  var texto = "Se han guardado los cambios";
+  switch (tipo_accion){
+    case "crear":
+      snackbar.classList.add("verde");
+      texto= texto_crear;
+      break;
+    case "modificar":
+      snackbar.classList.add("naranja");
+      texto= texto_modificar;
+    break;
+    case "eliminar":
+      snackbar.classList.add("rojo");
+      texto = texto_eliminar;
+    break;
+  }
+  console.log(snackbar);
+  $('#texto_tostada').text(texto);
+  // Add the "show" class to DIV
+  snackbar.classList.toggle("show");
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+}
 
 
 </script>
@@ -345,5 +389,7 @@
                     </tbody>
                 </table>
             @endif
-@endsection
 -->
+@endsection
+
+
