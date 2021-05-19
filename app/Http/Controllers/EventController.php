@@ -168,6 +168,11 @@ class EventController extends Controller
         //$event->save();
         $event->update();
         //return $event;
+        //tras la actualización del evento, actualizamos events_users
+        $string_asistentes = $request->input('array_asistentes');
+        $array_asistentes = explode(",", $string_asistentes);
+        //var_dump($array_asistentes);
+        $event->users()->sync($array_asistentes);
     }
 
     public function destruir(Request $request)

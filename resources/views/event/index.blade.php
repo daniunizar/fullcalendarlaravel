@@ -205,7 +205,13 @@
         console.log("hour_end: "+datos.get('hour_end'));
         console.log("start: "+datos.get('start'));
         console.log("end: "+datos.get('end'));
-
+        var array_asistentes = new Array();
+        $("input:checkbox:checked").each(function() {
+             console.log($(this).attr('id'));
+             array_asistentes.push($(this).attr('id'));
+        });
+        datos.append('array_asistentes', array_asistentes);
+        console.log("Array asistentes: "+array_asistentes);
         $.ajax({
           type: "POST",
           url: "{{route('event.actualizar')}}",       
