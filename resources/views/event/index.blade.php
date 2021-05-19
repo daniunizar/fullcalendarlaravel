@@ -88,6 +88,9 @@
       },
       dateClick:function(info){
         limpiarFormulario();
+        $("#btnCrear").show();
+        $("#btnModificar").hide();
+        $("#btnEliminar").hide();
         $("#evento").modal("show");
       },
       eventClick:function(info){
@@ -99,6 +102,9 @@
           $("#hour_start").val(moment(info.event.start).format('hh:mm:ss'));
           $("#date_end").val(moment(info.event.end).format('YYYY-MM-DD'));
           $("#hour_end").val(moment(info.event.end).format('H:mm:ss'));
+          $("#btnCrear").hide();
+           $("#btnModificar").show();
+          $("#btnEliminar").show();
           $("#evento").modal("show");
 //          var array_asistentes = info.event.extendedProps.users[0];
           var array_asistentes = info.event.extendedProps.users;
