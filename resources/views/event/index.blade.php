@@ -92,6 +92,11 @@
         $("#btnCrear").show();
         $("#btnModificar").hide();
         $("#btnEliminar").hide();
+        $("#title").val("Nuevo Evento");
+        $('#date_start').val(moment(info.date).format('YYYY-MM-DD'));
+        $('#hour_start').val('10:00:00');
+        $('#date_end').val(moment(info.date).format('YYYY-MM-DD'));
+        $('#hour_end').val('12:00:00');
         $("#evento").modal("show");
       },
       eventClick:function(info){
