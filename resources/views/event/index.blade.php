@@ -82,12 +82,26 @@
     var calendarEl = document.getElementById('agenda');
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
+      firstDay: 1,//Cambia el día en que empieza la semana al LUNES
+      nowIndicator: true,//En la vista semanal y diaria te indica el momento actual con una raya roja
+      eventTimeFormat: { // like '14:30:00'
+              hour: '2-digit',
+              minute: '2-digit',
+              // second: '2-digit',
+              hour12: false
+            },
+      dayMaxEventRows: true, // for all non-TimeGrid views
+        views: {
+          timeGrid: {
+            dayMaxEventRows: 3 // adjust to 6 only for timeGridWeek/timeGridDay
+          }
+      },
       locale:"es",
       selectable: true,//Permite seleccionar los días del calendario
       editable: true,
       height: 850,//Altura del calendario
       headerToolbar: {
-        left: 'prev,next today myCustomButton',
+        left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
