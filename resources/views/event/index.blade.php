@@ -39,6 +39,10 @@
                       <label for="hour_end">Hora de finalización</label>
                       <input type="time" class="form-control" name="hour_end" id="hour_end" aria-describedby="helpId" placeholder="Hora de inicio">
                     </div>
+                    <div class="custom-control custom-switch text-right">
+                      <input type="checkbox" class="custom-control-input" id="allday_event_switch">
+                      <label class="custom-control-label" for="allday_event_switch">Todo el día</label>
+                    </div>
                     <div class="form-group">
                       <table>
                         <thead>
@@ -97,6 +101,7 @@
         $('#hour_start').val('10:00:00');
         $('#date_end').val(moment(info.date).format('YYYY-MM-DD'));
         $('#hour_end').val('12:00:00');
+        allday_toggle();
         $("#evento").modal("show");
       },
       eventClick:function(info){
@@ -105,12 +110,14 @@
           $("#id").val(info.event.id);
           $("#title").val(info.event.title);
           $("#date_start").val(moment(info.event.start).format('YYYY-MM-DD'));
-          $("#hour_start").val(moment(info.event.start).format('hh:mm:ss'));
+          $("#hour_start").val(moment(info.event.start).format('HH:mm:ss'));
           $("#date_end").val(moment(info.event.end).format('YYYY-MM-DD'));
-          $("#hour_end").val(moment(info.event.end).format('H:mm:ss'));
+          $("#hour_end").val(moment(info.event.end).format('HH:mm:ss'));
           $("#btnCrear").hide();
-           $("#btnModificar").show();
+          $("#btnModificar").show();
           $("#btnEliminar").show();
+          config_allday_toggle();
+          allday_toggle();
           $("#evento").modal("show");
 //          var array_asistentes = info.event.extendedProps.users[0];
           var array_asistentes = info.event.extendedProps.users;
@@ -139,6 +146,8 @@
     document.getElementById("btnCrear").addEventListener("click", fnSubmit);
     document.getElementById("btnModificar").addEventListener("click", updateEvent);
     document.getElementById("btnEliminar").addEventListener("click", deleteEvent);
+    $('#allday_event_switch').on('click', allday_toggle);//Al checkbox de la ventana modar de evento de todo el día le metemos una función al clicarlo que compruebe su estado y en consecuencia modifique horas y oculte campos
+
     
     //Al pulsar el Btn Crear Evento de la Modal evento
     function fnSubmit(e){
@@ -166,8 +175,10 @@
         var array_asistentes = new Array();
 
         $("input:checkbox:checked").each(function() {
+          if($(this).attr('id')!="allday_event_switch"){
              console.log($(this).attr('id'));
              array_asistentes.push($(this).attr('id'));
+          }
         });
         datos.append('array_asistentes', array_asistentes);
 
@@ -224,8 +235,10 @@
         console.log("end: "+datos.get('end'));
         var array_asistentes = new Array();
         $("input:checkbox:checked").each(function() {
+          if($(this).attr('id')!="allday_event_switch"){
              console.log($(this).attr('id'));
              array_asistentes.push($(this).attr('id'));
+          }
         });
         datos.append('array_asistentes', array_asistentes);
         console.log("Array asistentes: "+array_asistentes);
@@ -306,6 +319,40 @@
         });
     }
 
+    function allday_toggle(){
+          if ($('#allday_event_switch').is(':checked')){
+            console.log("CheckButton all_day marcado");
+            $('#date_start').prop( "disabled", true);
+            $("#date_end").val($('#date_start').val());            
+            $('#date_end').prop( "disabled", true );
+            $("#hour_start").val("00:00");
+            $("#hour_end").val("23:59"); 
+            $("#hour_start").prop( "disabled", true);
+            $("#hour_end").prop( "disabled", true);
+          }else{
+            console.log("CheckButton all_day desmarcado");
+            $('#date_start').prop( "disabled", false);
+            $('#date_end').prop( "disabled", false);
+            $("#hour_start").prop( "disabled", false);
+            $("#hour_end").prop( "disabled", false);
+          }
+        }
+        function config_allday_toggle(){        
+          var date_start = $('#date_start').val();
+          var hour_start = $('#hour_start').val();
+          var date_end = $('#date_end').val();
+          var hour_end = $('#hour_end').val();
+          console.log("fecha inicio: "+date_start);
+          console.log("fecha fin: "+date_end);
+          console.log("hora inicio: "+hour_start);
+          console.log("hora fin: "+hour_end);
+          if((date_start == date_end)&&(hour_start=="00:00:00")&&(hour_end=="23:59:00")){
+            $('#allday_event_switch').prop( "checked", true );
+          }else{
+            $('#allday_event_switch').prop( "checked", false );
+          }
+        }
+
     function pintar_asistentes(array_ids_asistentes){
       console.log(typeof array_ids_asistentes);
       //var array_ids_asistentes = string_ids_asistentes.split(",");
@@ -326,6 +373,8 @@
           $("#hour_start").val("");
           $("#date_end").val("");
           $("#hour_end").val("");
+          //Limpiamos el checkbox de allday event
+          $('#allday_event_switch').prop( "checked", false );
           //limpiamos todos los checkboxes:
           $("input:checkbox:checked").each(function() {
              console.log($(this).attr('id'));

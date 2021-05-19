@@ -69,18 +69,21 @@ class EventController extends Controller
   
         $event_id = $event->id;//Recuperamos la id del evento creado, para usarla en events_users
         $string_asistentes = $request->input('array_asistentes');
-        $array_asistentes = explode(",", $string_asistentes);
-        //var_dump($array_asistentes);
-        $event=Event::find($event_id);
-
-     
-        $event->users()->attach($array_asistentes);
-/*
-        foreach ($array_asistentes as $valor){ //$valor es cada id de un checkbox activo, de un user que asiste al evento
+        if(!empty($string_asistentes)){
+            
+            $array_asistentes = explode(",", $string_asistentes);
+            //var_dump($array_asistentes);
             $event=Event::find($event_id);
-            $event->users()->attach($valor);
+    
+         
+            $event->users()->attach($array_asistentes);
+    /*
+            foreach ($array_asistentes as $valor){ //$valor es cada id de un checkbox activo, de un user que asiste al evento
+                $event=Event::find($event_id);
+                $event->users()->attach($valor);
+            }
+    */
         }
-*/
     }
 
     /**
@@ -170,9 +173,14 @@ class EventController extends Controller
         //return $event;
         //tras la actualización del evento, actualizamos events_users
         $string_asistentes = $request->input('array_asistentes');
+        if(!empty($string_asistentes)){
         $array_asistentes = explode(",", $string_asistentes);
         //var_dump($array_asistentes);
         $event->users()->sync($array_asistentes);
+        }else{
+
+            $event->users()->detach();
+        }
     }
 
     public function destruir(Request $request)
