@@ -184,6 +184,10 @@
     //AL pulsar el Btn Editar de la Modal evento
     function updateEvent(e){
         e.preventDefault();
+        var r = confirm("¿Desea guardar los cambios?");
+        if (r == false) {
+          $("#evento").modal('hide');
+        } else {
         var title = $('#title').val();
         var target = this.dataset.target;
         var formulario = document.querySelector(target);
@@ -233,10 +237,14 @@
           processData: false,  // tell jQuery not to process the data
           contentType: false   // tell jQuery not to set contentType
         });
-
+        }
     }
 
     function deleteEvent(){
+      var r = confirm("¿Desea eliminar el evento seleccionado?");
+        if (r == false) {
+          $("#evento").modal('hide');
+        } else {
       var id = $("#id").val();
       console.log("Id del elemento a borrar: "+id);
       var data = new FormData();
@@ -259,8 +267,8 @@
           processData: false,  // tell jQuery not to process the data
           contentType: false   // tell jQuery not to set contentType
         });
+      }
     }
-
     function actualizar_elemento_dropeado(info){
       var id = info.event.id;
       var title = info.event.title;
