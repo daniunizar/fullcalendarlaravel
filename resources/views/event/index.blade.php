@@ -24,19 +24,19 @@
                     </div>
                     <div class="form-group">
                       <label for="date_start">Fecha de inicio</label>
-                      <input type="text" class="form-control" name="date_start" id="date_start" aria-describedby="helpId" placeholder="Fecha de inicio">
+                      <input type="date" class="form-control" name="date_start" id="date_start" aria-describedby="helpId" placeholder="Fecha de inicio">
                     </div>
                     <div class="form-group">
                       <label for="hour_start">Horade inicio</label>
-                      <input type="text" class="form-control" name="hour_start" id="hour_start" aria-describedby="helpId" placeholder="Hora de inicio">
+                      <input type="time" class="form-control" name="hour_start" id="hour_start" aria-describedby="helpId" placeholder="Hora de inicio">
                     </div>
                     <div class="form-group">
                       <label for="date_end">Fecha de finalización</label>
-                      <input type="text" class="form-control" name="date_end" id="date_end" aria-describedby="helpId" placeholder="Fecha de finalización">
+                      <input type="date" class="form-control" name="date_end" id="date_end" aria-describedby="helpId" placeholder="Fecha de finalización">
                     </div>
                     <div class="form-group">
                       <label for="hour_end">Hora de finalización</label>
-                      <input type="text" class="form-control" name="hour_end" id="hour_end" aria-describedby="helpId" placeholder="Hora de inicio">
+                      <input type="time" class="form-control" name="hour_end" id="hour_end" aria-describedby="helpId" placeholder="Hora de inicio">
                     </div>
                     <div class="form-group">
                       <table>
